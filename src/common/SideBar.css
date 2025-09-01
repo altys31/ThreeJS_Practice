@@ -1,0 +1,44 @@
+.sideBar {
+  transition : all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  width: 240px;
+  height: 100%;
+  padding: 0.5rem;
+  padding-top: 48px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap : 0.5rem;
+  background-color: #efefef63;
+  z-index: 30;
+
+}
+
+.fold {
+  transform: translateX(-100%);
+  border-right: none;
+}
+
+.unfold {
+  border-right: 1px solid #EEEEEE;
+}
+
+.content {
+  width: 120px;
+  background-color: rgb(180, 180, 180);
+  color :white;
+  border-radius: 0.25rem 1rem 1rem 0.25rem;
+  padding-left: 0.25rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.selected { 
+  width: 100%;
+  background-color: rgb(104, 104, 104);
+}
+
+.content:hover {
+  width: 100%;
+  background-color: grey;
+}
