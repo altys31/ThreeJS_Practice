@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 export const Clouds = ({ count = 12, area = 60, speed = 0.5 }) => {
   const group = useRef<THREE.Group>(null!);
-  const textures = useMemo(() => new THREE.TextureLoader().load("public/cloud_soft.png"), []);
+  const textures = useMemo(() => new THREE.TextureLoader().load("/cloud_soft.png"), []);
   const items = useMemo(
     () =>
       [...Array(count)].map(() => ({

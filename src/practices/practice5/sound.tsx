@@ -36,7 +36,7 @@ export const RawPositionalAudio = ({
     // 3) 버퍼 로드
     const loader = new THREE.AudioLoader();
     loader.load(
-      "public/bgm.mp3", // ⬅️ "/bgm.mp3" 같이 루트 경로
+      "/bgm.mp3", // ⬅️ "/bgm.mp3" 같이 루트 경로
       (buffer) => {
         if (disposed) return;
         audio.setBuffer(buffer);
@@ -64,7 +64,7 @@ export const RawPositionalAudio = ({
     wet.connect(listener.getInput());
     (async () => {
       try {
-        const res = await fetch("public/impulse.wav"); // ⬅️ 작은 IR 파일 권장
+        const res = await fetch("/impulse.wav"); // ⬅️ 작은 IR 파일 권장
         const buf = await res.arrayBuffer();
         if (!disposed) convolver.buffer = await ctx.decodeAudioData(buf);
       } catch (e) {
