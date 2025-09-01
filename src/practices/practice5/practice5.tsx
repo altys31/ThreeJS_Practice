@@ -9,7 +9,7 @@ function FPCamera() {
   const ref = useRef<PointerLockControlsImpl>(null!);
   const [, get] = useKeyboardControls();
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!ref.current?.isLocked) return;
     const { forward, backward, left, right, sprint } = get();
     const speed = (sprint ? 10 : 6) * delta;

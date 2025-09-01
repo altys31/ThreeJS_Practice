@@ -9,7 +9,7 @@ import * as THREE from "three";
 import { WASDController } from "./controller";
 
 export const Practice6 = () => {
-  const ballRef = useRef<THREE.Mesh>(null);
+  const ballRef = useRef<THREE.Mesh>(null!);
   const velocity = useRef(0); // (기존) 수직 속도
   const hVel = useRef(new THREE.Vector3()); // ★ 추가: 수평 속도
   const sunRef = useRef<THREE.DirectionalLight>(null);

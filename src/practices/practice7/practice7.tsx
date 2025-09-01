@@ -7,7 +7,7 @@ import { Ground } from "./ground";
 import { Rain } from "./rain";
 import { Snow } from "./snow";
 import { Clouds } from "./cloud";
-import { Lightening } from "./Lightening";
+import { Lightening } from "./lightening";
 import { useState } from "react";
 
 const Scene = () => {

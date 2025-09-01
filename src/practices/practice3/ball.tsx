@@ -1,5 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useLayoutEffect } from "react";
+import * as THREE from "three";
 
 type BallProps = {
   ballRef: React.MutableRefObject<THREE.Mesh | null>;
@@ -15,6 +16,7 @@ export const Ball = ({ ballRef, velocity }: BallProps) => {
   }, []);
 
   useFrame(() => {
+    if (!ballRef.current) return;
     velocity.current += gravity; // 가속도 적용
     ballRef.current.position.y += velocity.current;
 

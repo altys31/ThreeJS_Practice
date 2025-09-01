@@ -6,7 +6,7 @@ import * as THREE from "three";
 import { useKeyboard } from "./useKeyboard";
 
 type Props = {
-  ballRef: RefObject<THREE.Mesh>;
+  ballRef: RefObject<THREE.Mesh> | null;
   hVel: React.MutableRefObject<THREE.Vector3>; // 수평 속도 (x,z)
   paused?: boolean;
   radius?: number; // 공 반지름(기본 0.5)
@@ -36,7 +36,7 @@ export const WASDController = ({
   const q = useMemo(() => new THREE.Quaternion(), []);
 
   useFrame((_, delta) => {
-    if (!ballRef.current || paused) return;
+    if (!ballRef || paused) return;
 
     // 카메라 기준 전후/좌우 벡터 (XZ 평면)
     camera.getWorldDirection(fwd).setY(0).normalize();
