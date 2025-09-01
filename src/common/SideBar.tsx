@@ -18,7 +18,7 @@ export const SideBar = ({ visible, selected, handleSelected, contentList }: Side
             className={`content ${selected === i && `selected`} `}
             onClick={() => handleSelected(i)}
           >
-            {a.type.name === "Practice5" ? a.type.name + " 🔊" : a.type.name}
+            {i === 4 ? "Practice " + (i + 1) + " 🔊" : "Practice " + (i + 1)}
           </div>
         );
       })}

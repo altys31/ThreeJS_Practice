@@ -15,7 +15,6 @@ export default function App() {
   const [selected, setSelected] = useState<number>(0);
 
   const contentList = [
-    <div />,
     <Practice1 />,
     <Practice2 />,
     <Practice3 />,
