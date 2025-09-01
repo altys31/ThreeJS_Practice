@@ -11,7 +11,7 @@ interface SideBarProps {
 export const SideBar = ({ visible, selected, handleSelected, contentList }: SideBarProps) => {
   return (
     <aside className={`sideBar ${visible ? `unfold` : `fold`}`}>
-      {contentList.map((a, i) => {
+      {contentList.map((_, i) => {
         return (
           <div
             key={i}
