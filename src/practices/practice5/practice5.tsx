@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RawPositionalAudio } from "./sound";
 import type { PointerLockControls as PointerLockControlsImpl } from "three-stdlib"; // drei 내부 의존성
-import { Hall } from "./hall";
 import { Room } from "./room";
 
 function FPCamera() {
