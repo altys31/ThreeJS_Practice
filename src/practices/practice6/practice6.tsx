@@ -15,8 +15,8 @@ export const Practice6 = () => {
   const sunRef = useRef<THREE.DirectionalLight>(null);
 
   const { gravity, bounce, paused, sunAzimuth, sunElevation } = useControls({
-    gravity: { value: -0.0025, min: -0.02, max: 0, step: 0.0005 },
-    bounce: { value: 0.8, min: 0, max: 1, step: 0.01 },
+    gravity: { label: "중력", value: -0.0025, min: -0.02, max: 0, step: 0.0005 },
+    bounce: { label: "탄성", value: 0.8, min: 0, max: 1, step: 0.01 },
     paused: false,
     sunAzimuth: { label: "태양 방위각", value: 50, min: 0, max: 360, step: 1 },
     sunElevation: { label: "태양 고도", value: 45, min: 0, max: 89, step: 1 },

@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RawPositionalAudio } from "./sound";
 import type { PointerLockControls as PointerLockControlsImpl } from "three-stdlib"; // drei 내부 의존성
+import { Hall } from "./hall";
+import { Room } from "./room";
 
 function FPCamera() {
   const ref = useRef<PointerLockControlsImpl>(null!);
@@ -23,15 +25,6 @@ function FPCamera() {
 
   return <PointerLockControls ref={ref} />;
 }
-
-const Floor = () => {
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-      <planeGeometry args={[50, 50]} />
-      <meshStandardMaterial color="#fdffdc" />
-    </mesh>
-  );
-};
 
 const NarrowSpotLight = () => {
   const lightRef = useRef<THREE.SpotLight>(null!);
@@ -59,7 +52,7 @@ const NarrowSpotLight = () => {
         castShadow
         color={"#ffffff"}
         intensity={10.0} // 밝기
-        angle={Math.PI / 3} // 좁은 빔(작게 할수록 더 좁음)
+        angle={Math.PI / 2} // 좁은 빔(작게 할수록 더 좁음)
         penumbra={1} // 가장자리 부드러움
         distance={15} // 도달 거리
         decay={0.25} // 감쇠(물리적 감쇠 느낌)
@@ -108,14 +101,15 @@ export const Practice5 = () => {
           Press W,A,S,D to move!
         </div>
 
-        <Canvas camera={{ position: [0, 3, 18] }} dpr={[1, 2]} shadows>
+        <Canvas camera={{ position: [0, 3, 35] }} dpr={[1, 2]} shadows>
           <FPCamera />
-          <gridHelper args={[50, 50, "#444", "#222"]} />
-          <Floor />
+          <gridHelper args={[100, 100, "#444", "#222"]} />
+          <Room />
+          {/* <Hall /> */}
           <shadowMaterial opacity={0.3} />
-          <ambientLight intensity={0.25} />
+          <ambientLight intensity={0.33} />
           <NarrowSpotLight />
-          <RawPositionalAudio position={[2, 0.2, -1]} />
+          <RawPositionalAudio position={[0, 0.2, 0]} />
         </Canvas>
       </div>
     </KeyboardControls>

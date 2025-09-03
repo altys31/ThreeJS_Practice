@@ -1,3 +1,4 @@
+import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -7,10 +8,23 @@ export const RawPositionalAudio = ({
 }: {
   position?: [number, number, number];
 }) => {
+  const { scene } = useGLTF("./piano.glb"); // glb 파일 경로
   const { camera } = useThree();
   const groupRef = useRef<THREE.Group>(null!); // ⬅️ 오디오를 여기에 붙임
   const sourceRef = useRef<THREE.PositionalAudio>(null!);
 
+  const Mat = new THREE.MeshPhysicalMaterial({
+    color: "#959682",
+    transmission: 0.15,
+    roughness: 0.2,
+    thickness: 0.7,
+  });
+
+  scene.traverse((o) => {
+    if (o instanceof THREE.Mesh) {
+      o.material = Mat;
+    }
+  });
   useEffect(() => {
     // 1) AudioListener 준비
     let created = false;
@@ -77,7 +91,7 @@ export const RawPositionalAudio = ({
     let raf = 0;
     const update = () => {
       const dist = camera.position.distanceTo(temp.set(position[0], position[1], position[2]));
-      const t = Math.min(Math.max((dist - 4) / (24 - 4), 0), 1);
+      const t = Math.min(Math.max((dist - 10) / (24 - 4), 0), 1);
       const smooth = t * t * (3 - 2 * t);
       const target = 2 * smooth; // wet 상한
       send.gain.setTargetAtTime(target, ctx.currentTime, 0.03);
@@ -112,10 +126,7 @@ export const RawPositionalAudio = ({
 
   return (
     <group ref={groupRef} position={position}>
-      <mesh>
-        <boxGeometry args={[0.4, 0.4, 0.4]} />
-        <meshStandardMaterial color="#ffae00" />
-      </mesh>
+      <primitive object={scene} />
     </group>
   );
 };
