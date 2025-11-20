@@ -2,7 +2,7 @@ import { ConvexGeometry } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
 import { useEffect, useMemo } from "react";
 
-export const ConObj = ({ size, position }: { size: number; position: THREE.Vector3 }) => {
+export const ConObj = ({ size }: { size: number; position: THREE.Vector3 }) => {
   const points: THREE.Vector3[] = [];
 
   const COLOR = [

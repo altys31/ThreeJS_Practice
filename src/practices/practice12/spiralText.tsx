@@ -7,7 +7,6 @@ import * as THREE from "three";
 export const SpiralText = ({
   position,
   text,
-  size,
 }: {
   position: THREE.Vector3;
   text: string;
@@ -15,13 +14,11 @@ export const SpiralText = ({
 }) => {
   const count = 360;
   const amplitude = 250;
-  const xTimes = 150;
   const reversedText = text.split("").reverse().join("");
   const COLOR = ["#ff6464", "#feffad"];
   const points: THREE.Vector3[] = [];
 
   for (let i = 0; i < count; i++) {
-    const x = i * xTimes;
     const sin = Math.sin(THREE.MathUtils.degToRad(i)) * amplitude;
     const cos = Math.cos(THREE.MathUtils.degToRad(i)) * amplitude;
     const pos = new THREE.Vector3(

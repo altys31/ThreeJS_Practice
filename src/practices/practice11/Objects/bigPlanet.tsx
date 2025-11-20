@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { ConvexGeometry } from "three/examples/jsm/geometries/ConvexGeometry";
+import { ConvexGeometry } from "three/addons/geometries/ConvexGeometry.js";
 
 export const BigPlanet = ({ position, size }: { position: THREE.Vector3; size: number }) => {
   // shooting star 구현 예정

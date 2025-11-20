@@ -2,8 +2,9 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
 import { Star } from "./Objects/star";
-import { useEffect, useRef } from "react";
-import type { OrbitControls as OrbitControlsType } from "three/examples/jsm/controls/OrbitControls";
+import { useRef } from "react";
+import type { RefObject } from "react";
+import type { OrbitControls as OrbitControlsType } from "three-stdlib";
 import { Planet } from "./Objects/planet";
 import { BigPlanet } from "./Objects/bigPlanet";
 
@@ -15,7 +16,7 @@ export const Practice11 = ({ isDebug }: { isDebug: boolean }) => {
     controlsRef,
   }: {
     speed?: number;
-    controlsRef?: OrbitControlsType;
+    controlsRef?: RefObject<OrbitControlsType | null>;
   }) => {
     const { camera } = useThree();
     const dir = useRef(new THREE.Vector3());

@@ -1,4 +1,4 @@
-import { ConvexGeometry } from "three/examples/jsm/geometries/ConvexGeometry";
+import { ConvexGeometry } from "three/addons/geometries/ConvexGeometry.js";
 import * as THREE from "three";
 import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { useRef, useMemo, useEffect } from "react";
@@ -104,16 +104,14 @@ export const Planet = ({ size, position }: { size: number; position: THREE.Vecto
     const m = meshRef.current;
     if (!m) return;
 
-    const handler = (intersection: THREE.Intersection, ev?: PointerEvent) => {
+    const handler = (intersection: THREE.Intersection) => {
       // build a minimal ThreeEvent-like object expected by handlePointerEnter
       const fake = {
         point: (intersection.point || new THREE.Vector3()).clone(),
         face: intersection.face || null,
-        // ray.direction: prefer intersection.ray.direction if present, otherwise compute from camera
+        // ray.direction: compute from camera to intersection point
         ray: {
-          direction: intersection.ray?.direction
-            ? intersection.ray.direction.clone().normalize()
-            : intersection.point
+          direction: intersection.point
             ? intersection.point
                 .clone()
                 .sub(camera?.position ?? new THREE.Vector3())
@@ -136,7 +134,6 @@ export const Planet = ({ size, position }: { size: number; position: THREE.Vecto
   }, [camera]);
 
   // --- 상호작용: 마우스 닿으면 멀리 날아가게 ---
-  const tmpVec = useRef(new THREE.Vector3());
   const worldPos = useRef(new THREE.Vector3());
   const lastFleeTime = useRef(0);
   const FLEE_COOLDOWN = 0.24; // 초
@@ -216,7 +213,7 @@ export const Planet = ({ size, position }: { size: number; position: THREE.Vecto
       />
 
       <PlanetTrailParticles
-        sourceRef={meshRef}
+        sourceRef={meshRef as React.RefObject<THREE.Object3D>}
         velocityRef={velocity}
         emitThreshold={8}
         particleLifetime={0.6}

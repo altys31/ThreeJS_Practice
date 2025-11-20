@@ -110,9 +110,7 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
     const sections = gsap.utils.toArray<HTMLElement>(".section-wrapper > section");
 
     // 가로 스크롤 애니메이션
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const horizontalScroll = gsap.to(sections, {
+    gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
