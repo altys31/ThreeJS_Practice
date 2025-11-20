@@ -15,4 +15,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'SUIT';
+  src: url('/font/SUIT-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
 }

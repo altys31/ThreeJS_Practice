@@ -1,0 +1,62 @@
+.section-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+
+}
+
+.section-01 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.section-02{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: bold;
+  background-color: rgb(22, 22, 22, 0.75);
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.section-03 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: bold;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+@font-face {
+  font-family: 'Cafe24Decoshadow';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decoshadow.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}

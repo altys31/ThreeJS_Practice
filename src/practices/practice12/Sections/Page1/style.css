@@ -1,0 +1,41 @@
+.first-profile-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+
+}
+
+.page-header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  justify-self: end;
+}
+
+.main {
+  font-size: 1.5rem;
+  text-align: center;
+  color : white;
+  font-family: "SUIT", sans-serif;
+}
+
+.footer {
+  font-size : 0.75rem;
+  position: absolute;
+  bottom: 48px;
+  right: 20px;
+  z-index: 10;
+  color : grey;
+}
+
+@font-face {
+  font-family: 'SUIT';
+  src: url('/font/SUIT-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+}

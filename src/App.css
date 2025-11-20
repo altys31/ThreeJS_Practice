@@ -1,6 +1,5 @@
-
 .sidebarButton {
-  position: absolute;
+  position: fixed;
   border: 0;
   background: none;
   width: 42px;
@@ -9,3 +8,9 @@
   z-index: 40;
 }
 
+@font-face {
+  font-family: 'SUIT';
+  src: url('/font/SUIT-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+}
