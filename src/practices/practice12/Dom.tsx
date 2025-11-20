@@ -179,7 +179,6 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
         <section className="section-02">{<Page1 isDebug={isDebug} />}</section>
         <section className="section-03">{<Page2 />}</section>
         <section className="section-03">{<Page3 />}</section>
-        <section className="section-03">4 페이지</section>
       </div>
     </div>
   );
