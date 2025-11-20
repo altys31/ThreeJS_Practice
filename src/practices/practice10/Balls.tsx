@@ -2,7 +2,7 @@ import { CameraControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { Ball } from "./ball";
+import { Ball } from "./Ball";
 
 export const Balls = ({ isDebug }: { isDebug: boolean }) => {
   const ballRadius = 0.5;
@@ -34,7 +34,7 @@ export const Balls = ({ isDebug }: { isDebug: boolean }) => {
 
   const checkCreation = (newVec: THREE.Vector3) => {
     // 새로운 공 생성 체크
-    posVectors.current.forEach((vec, index) => {
+    posVectors.current.forEach((vec) => {
       // 처음 위치가 겹치지 않도록 설정
       if (newVec.distanceTo(vec) < ballRadius * 2) {
         newVec.set(

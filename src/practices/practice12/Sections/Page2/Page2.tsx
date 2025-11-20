@@ -73,19 +73,6 @@ export const Page2 = () => {
     ],
   ];
 
-  const setBackgroundClass = () => {
-    switch (selectedIndex) {
-      case 0:
-        return "pageBackground";
-      case 1:
-        return "agijagiBackground";
-      case 2:
-        return "solsolhighBackground";
-      case 3:
-        return "rebuBackground";
-    }
-  };
-
   const colorList = ["#825cff", "#fec006", "#0046ff", "#943aee"];
   const fadeoutColorList = ["#654491", "#ffc04b", "#4072fc", "#b83bfc"];
   return (

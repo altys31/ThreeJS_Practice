@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useLayoutEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
-import type { OrbitControls as OrbitControlsType } from "three/examples/jsm/controls/OrbitControls";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Star } from "../practice11/Objects/star";
@@ -22,7 +22,7 @@ gsap.registerPlugin(TextPlugin);
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
-  const controlsRef = useRef<OrbitControlsType>(null);
+  const controlsRef = useRef<OrbitControlsImpl>(null);
   const scrollcontainerRef = useRef<HTMLDivElement>(null);
 
   // interactive group ref: raycast는 이 그룹(및 자식)만 검사하도록 제한
@@ -33,7 +33,7 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
     controlsRef,
   }: {
     speed?: number;
-    controlsRef?: OrbitControlsType;
+    controlsRef?: React.RefObject<OrbitControlsImpl | null>;
   }) => {
     const { camera } = useThree();
     const dir = useRef(new THREE.Vector3());

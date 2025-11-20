@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, easeInOut, easeIn } from "framer-motion";
 import "./AnimatedName.css";
 
 interface AnimatedNameProps {
@@ -33,7 +33,7 @@ export const AnimatedName = ({
         pathLength: {
           delay: startDelay + i * 0.8,
           duration: 1.2,
-          ease: "easeInOut",
+          ease: easeInOut,
         },
         opacity: {
           delay: startDelay + i * 0.8,
@@ -42,7 +42,7 @@ export const AnimatedName = ({
         fill: {
           delay: startDelay + i * 0.8 + 1.2,
           duration: 0.5,
-          ease: "easeIn",
+          ease: easeIn,
         },
       },
     }),

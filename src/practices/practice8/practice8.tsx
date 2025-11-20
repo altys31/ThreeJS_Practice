@@ -7,7 +7,6 @@ export const Practice8 = () => {
   const vecB = new THREE.Vector3(-4, 3, 0);
   const vecC = new THREE.Vector3().addVectors(vecA, vecB);
   const vecD = vecA.clone().sub(vecB);
-  const normalizedA = vecA.clone().normalize();
   const origin = new THREE.Vector3(0, 0, 0);
   const ditA = origin.distanceTo(vecA);
   const ditB = origin.distanceTo(vecB);

@@ -2,7 +2,6 @@ import { CameraControls } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
-import { texture } from "three/tsl";
 
 export const Practice9 = () => {
   const BearToHoney = () => {
@@ -14,7 +13,7 @@ export const Practice9 = () => {
 
     const textureRef = useRef<THREE.Sprite>(null);
 
-    useFrame((state, delta) => {
+    useFrame((_, delta) => {
       const textureAObj = textureRef.current;
       if (textureAObj) {
         textureAObj.position.x += vecB.clone().sub(vecA).normalize().x * delta;

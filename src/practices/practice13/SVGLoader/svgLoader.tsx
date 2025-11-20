@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
+import { SVGLoader } from "three/examples/jsm/Addons.js";
+import type { SVGResult } from "three/examples/jsm/Addons.js";
 
 interface SVGMeshProps {
   svgPath: string;
@@ -30,13 +30,13 @@ export const SVGMesh = ({
 
     loader.load(
       svgPath,
-      (data) => {
+      (data: SVGResult) => {
         const paths = data.paths;
 
-        paths.forEach((path) => {
+        paths.forEach((path: THREE.ShapePath) => {
           const shapes = SVGLoader.createShapes(path);
 
-          shapes.forEach((shape) => {
+          shapes.forEach((shape: THREE.Shape) => {
             const geometry = new THREE.ExtrudeGeometry(shape, {
               depth,
               bevelEnabled: false,
@@ -60,7 +60,7 @@ export const SVGMesh = ({
         });
       },
       undefined,
-      (error) => {
+      (error: unknown) => {
         console.error("SVG 로딩 실패:", error);
       }
     );

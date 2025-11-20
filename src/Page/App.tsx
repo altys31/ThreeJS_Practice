@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { SideBar } from "./common/SideBar";
-import { Practice1 } from "./practices/practice1/practice1";
+import { SideBar } from "../common/SideBar";
+import { Practice1 } from "../practices/practice1/practice1";
 import "./App.css";
-import Practice2 from "./practices/practice2/practice2";
-import { Practice4 } from "./practices/practice4/practice4";
-import { Practice3 } from "./practices/practice3/practice3";
-import { Practice5 } from "./practices/practice5/practice5";
-import { Practice6 } from "./practices/practice6/practice6";
-import { Practice7 } from "./practices/practice7/practice7";
-import { Practice8 } from "./practices/practice8/practice8";
-import { Practice9 } from "./practices/practice9/Practice9";
-import { Practice10 } from "./practices/practice10/Practice10";
-import { Practice11 } from "./practices/practice11/practice11";
-import { Practice12 } from "./practices/practice12/practice12";
-import { Practice13 } from "./practices/practice13/practice13";
+import Practice2 from "../practices/practice2/practice2";
+import { Practice4 } from "../practices/practice4/practice4";
+import { Practice3 } from "../practices/practice3/practice3";
+import { Practice5 } from "../practices/practice5/practice5";
+import { Practice6 } from "../practices/practice6/practice6";
+import { Practice7 } from "../practices/practice7/practice7";
+import { Practice8 } from "../practices/practice8/practice8";
+import { Practice9 } from "../practices/practice9/Practice9";
+import { Practice10 } from "../practices/practice10/Practice10";
+import { Practice11 } from "../practices/practice11/practice11";
+import { Practice12 } from "../practices/practice12/practice12";
+import { Practice13 } from "../practices/practice13/practice13";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function App() {

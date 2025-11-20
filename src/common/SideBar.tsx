@@ -1,6 +1,5 @@
 import type { JSX } from "react";
 import "./SideBar.css";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 interface SideBarProps {
   visible: boolean;
@@ -19,7 +18,6 @@ export const SideBar = ({
   contentList,
   isDebug,
   setDebugMode,
-  setVisible,
 }: SideBarProps) => {
   return (
     <>
