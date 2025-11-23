@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { SideBar } from "../common/SideBar";
 import { Practice1 } from "../practices/practice1/practice1";
-import "./App.css";
 import Practice2 from "../practices/practice2/practice2";
 import { Practice4 } from "../practices/practice4/practice4";
 import { Practice3 } from "../practices/practice3/practice3";
@@ -14,12 +12,10 @@ import { Practice10 } from "../practices/practice10/Practice10";
 import { Practice11 } from "../practices/practice11/practice11";
 import { Practice12 } from "../practices/practice12/practice12";
 import { Practice13 } from "../practices/practice13/practice13";
-import { GiHamburgerMenu } from "react-icons/gi";
 
-export default function App() {
-  const [visible, setVisible] = useState<boolean>(true);
-  const [selected, setSelected] = useState<number>(0);
-  const [isDebug, setIsDebug] = useState<boolean>(false);
+export default function Projects({ selectedProject }: { selectedProject: number }) {
+  const [selected] = useState<number>(selectedProject);
+  const [isDebug] = useState<boolean>(false);
 
   const contentList = [
     <Practice1 />,
@@ -37,17 +33,17 @@ export default function App() {
     <Practice13 />,
   ];
 
-  const handleSelected = (num: number) => {
-    setSelected(num);
-  };
+  // const handleSelected = (num: number) => {
+  //   setSelected(num);
+  // };
 
   const SelectedContent = (num: number) => {
     return contentList[num];
   };
 
-  const setDebugMode = () => {
-    setIsDebug(!isDebug);
-  };
+  // const setDebugMode = () => {
+  //   setIsDebug(!isDebug);
+  // };
 
   return (
     <div
@@ -58,7 +54,7 @@ export default function App() {
         flexDirection: "row",
       }}
     >
-      <button
+      {/* <button
         style={{ zIndex: "9999" }}
         className={`sidebarButton`}
         onClick={(e) => {
@@ -76,7 +72,7 @@ export default function App() {
         isDebug={isDebug}
         contentList={contentList}
         setVisible={setVisible}
-      />
+      />  */}
 
       <div
         style={{

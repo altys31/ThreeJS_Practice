@@ -8,7 +8,7 @@ export const RawPositionalAudio = ({
 }: {
   position?: [number, number, number];
 }) => {
-  const { scene } = useGLTF("./piano.glb"); // glb 파일 경로
+  const { scene } = useGLTF("/piano.glb"); // glb 파일 경로
   const { camera } = useThree();
   const groupRef = useRef<THREE.Group>(null!); // ⬅️ 오디오를 여기에 붙임
   const sourceRef = useRef<THREE.PositionalAudio>(null!);

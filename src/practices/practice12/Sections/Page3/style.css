@@ -1,4 +1,4 @@
-.pageBackground{
+.page3-background{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@
   font-size: 1rem;
 }
 
-.page-container {
+.page3-container {
   display: flex;
   width: 100%;
   height: 100%;
@@ -19,27 +19,73 @@
   padding: 5rem;
 }
 
-.page-header{
+.page3-header{
   font-size: 2rem;
   margin-left: 2rem;
+  padding-bottom: 2rem;
+  font-weight: 300;
 }
 
-.project-items{
+.page3-items{
   width: 100%;
   height: 100%;
   border : 3px solid white;
   border-radius: 16px;
-
 }
 
-.project-item {
+.page3-description {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.page3-thumbnail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.page3-item {
   display: grid;
   align-items: center;
   justify-content: center;
   width : 100%;
   height : 20%;
   grid-template-columns: 20% 60% 10% 10%;
-  padding: 1rem;
   font-size: 14px;
   font-weight: 300;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  line-height: 3;
+}
+
+.chip{
+  display: inline-flex;
+  height: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  color: black;
+  font-size: 0.75rem;
+}
+
+.linkButton{
+  width: 80%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
 }
