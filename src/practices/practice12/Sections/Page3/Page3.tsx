@@ -41,7 +41,7 @@ export const Page3 = () => {
             <div className="page3-thumbnail">
               <img
                 src={Thumbnail2}
-                onClick={() => window.open("https://ykh-portfolio.vercel.app/project/3")}
+                onClick={() => window.open("/project/2")}
                 width={128}
                 style={{ justifySelf: "center", cursor: "pointer" }}
               />
@@ -55,10 +55,7 @@ export const Page3 = () => {
               <Chip label="#IR" color="#f0f0f0" />
             </div>
             <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-              <button
-                className="linkButton"
-                onClick={() => window.open("https://ykh-portfolio.vercel.app/project/3")}
-              >
+              <button className="linkButton" onClick={() => window.open("/project/2")}>
                 링크
               </button>
             </div>
@@ -67,7 +64,7 @@ export const Page3 = () => {
             <div className="page3-thumbnail">
               <img
                 src={Thumbnail3}
-                onClick={() => window.open("https://ykh-portfolio.vercel.app/project/2")}
+                onClick={() => window.open("/project/3")}
                 width={128}
                 style={{ justifySelf: "center", cursor: "pointer" }}
               />
@@ -80,10 +77,7 @@ export const Page3 = () => {
               <Chip label="#GLSL" color="#a0a0a0" />
             </div>
             <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-              <button
-                className="linkButton"
-                onClick={() => window.open("https://ykh-portfolio.vercel.app/project/3")}
-              >
+              <button className="linkButton" onClick={() => window.open("/project/3")}>
                 링크
               </button>
             </div>

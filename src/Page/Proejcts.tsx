@@ -12,10 +12,21 @@ import { Practice10 } from "../practices/practice10/Practice10";
 import { Practice11 } from "../practices/practice11/practice11";
 import { Practice12 } from "../practices/practice12/practice12";
 import { Practice13 } from "../practices/practice13/practice13";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { SideBar } from "../common/SideBar";
+import "./style.css";
+import { Practice14 } from "../practices/practice14/Practice14";
 
-export default function Projects({ selectedProject }: { selectedProject: number }) {
-  const [selected] = useState<number>(selectedProject);
-  const [isDebug] = useState<boolean>(false);
+export default function Projects({
+  selectedProject,
+  testMode = false,
+}: {
+  selectedProject?: number;
+  testMode?: boolean;
+}) {
+  const [visible, setVisible] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number>(selectedProject ? selectedProject : -1);
+  const [isDebug, setIsDebug] = useState<boolean>(false);
 
   const contentList = [
     <Practice1 />,
@@ -31,19 +42,23 @@ export default function Projects({ selectedProject }: { selectedProject: number 
     <Practice11 isDebug={isDebug} />,
     <Practice12 isDebug={isDebug} />,
     <Practice13 />,
+    <Practice14 />,
   ];
 
-  // const handleSelected = (num: number) => {
-  //   setSelected(num);
-  // };
+  const handleSelected = (num: number) => {
+    setSelected(num);
+  };
 
   const SelectedContent = (num: number) => {
+    if (num === -1) {
+      return <></>;
+    }
     return contentList[num];
   };
 
-  // const setDebugMode = () => {
-  //   setIsDebug(!isDebug);
-  // };
+  const setDebugMode = () => {
+    setIsDebug(!isDebug);
+  };
 
   return (
     <div
@@ -54,41 +69,30 @@ export default function Projects({ selectedProject }: { selectedProject: number 
         flexDirection: "row",
       }}
     >
-      {/* <button
-        style={{ zIndex: "9999" }}
-        className={`sidebarButton`}
-        onClick={(e) => {
-          e.stopPropagation();
-          setVisible(!visible);
-        }}
-      >
-        <GiHamburgerMenu size={24} />
-      </button>
-      <SideBar
-        visible={visible}
-        selected={selected}
-        handleSelected={handleSelected}
-        setDebugMode={setDebugMode}
-        isDebug={isDebug}
-        contentList={contentList}
-        setVisible={setVisible}
-      />  */}
+      {testMode && (
+        <>
+          <button
+            style={{ zIndex: "9999" }}
+            className={`sidebarButton`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setVisible(!visible);
+            }}
+          >
+            <GiHamburgerMenu size={24} />
+          </button>
+          <SideBar
+            visible={visible}
+            selected={selected}
+            handleSelected={handleSelected}
+            setDebugMode={setDebugMode}
+            isDebug={isDebug}
+            contentList={contentList}
+            setVisible={setVisible}
+          />
+        </>
+      )}
 
-      <div
-        style={{
-          position: "absolute",
-          top: `calc(100% - 4rem)`,
-          left: `calc(100% - 10rem)`,
-          opacity: "75%",
-          textAlign: "center",
-          userSelect: "none",
-          fontSize: "14px",
-          zIndex: "9999",
-        }}
-      >
-        Designed & Created <br />
-        by KyuHyeon Yang
-      </div>
       <div
         style={{
           display: "flex",
