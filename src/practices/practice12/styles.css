@@ -25,7 +25,7 @@
   transition: opacity 0.3s ease;
 }
 
-.section-02{
+.section-02 {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -40,7 +40,22 @@
   transition: opacity 0.3s ease;
 }
 
-.section-03 {
+.section-03{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: bold;
+  background-color: rgb(22, 22, 22, 0.75);
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.section-04 {
   position: relative;
   width: 100vw;
   height: 100vh;

@@ -1,0 +1,20 @@
+.scroll-hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: white;
+  z-index: 100;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.scroll-hint p {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}

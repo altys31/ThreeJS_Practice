@@ -2,8 +2,8 @@ import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { useLayoutEffect, useRef } from "react";
-import { OrbitControls } from "@react-three/drei";
+import { useLayoutEffect, useRef, Suspense, useMemo } from "react";
+import { OrbitControls, Preload } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -17,6 +17,9 @@ import { Page1 } from "./Sections/Page1/Page1";
 import { SVGMesh } from "../practice13/SVGLoader/svgLoader";
 import { Page2 } from "./Sections/Page2/Page2";
 import { Page3 } from "./Sections/Page3/Page3";
+import { Loader, CanvasFallback } from "../../components/Loader/Loader";
+import { ScrollProgress } from "../../components/ScrollProgress/ScrollProgress";
+import { ScrollHint } from "../../components/ScrollHint/ScrollHint";
 
 gsap.registerPlugin(TextPlugin);
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -24,8 +27,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
   const controlsRef = useRef<OrbitControlsImpl>(null);
   const scrollcontainerRef = useRef<HTMLDivElement>(null);
-
-  // interactive group ref: raycast는 이 그룹(및 자식)만 검사하도록 제한
   const interactiveRef = useRef<THREE.Group>(null!);
 
   const AutoZoomOut = ({
@@ -37,20 +38,18 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
   }) => {
     const { camera } = useThree();
     const dir = useRef(new THREE.Vector3());
-    const minDist = 4000; // 카메라가 이 거리 안으로 들어가지 않게 함
+    const minDist = 4000;
     const eps = 1e-6;
     let acceleration = 50;
     let reachedEnd = false;
 
     useFrame((_, delta) => {
       const len = camera.position.length();
-
-      // 지수적으로 상승하는 속도
       acceleration *= 1.01;
-      speed -= 150 + acceleration++; // 시간이 지남에 따라 점점 더 빨라짐
+      speed -= 150 + acceleration++;
       if (!isFinite(len) || len <= minDist + eps) {
         reachedEnd = true;
-        return; // 안전 체크
+        return;
       }
 
       if (reachedEnd) return;
@@ -66,7 +65,7 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
     return null;
   };
 
-  const genBackgroundStars = () => {
+  const genBackgroundStars = useMemo(() => {
     const stars = [];
     for (let i = 0; i < 5000; i++) {
       const size = [15, 10, 15, 25, 7, 20][THREE.MathUtils.randInt(0, 5)];
@@ -78,10 +77,9 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
       stars.push(<Star key={i} position={pos} size={size} />);
     }
     return stars;
-  };
+  }, []);
 
-  // 기존 genBackgroundPlanets를 그대로 쓰되, 렌더 시 group으로 감쌈
-  const genBackgroundPlanets = () => {
+  const genBackgroundPlanets = useMemo(() => {
     const planets = [];
     for (let i = 0; i < 250; i++) {
       const size = [800, 1000, 800, 2000, 1200][THREE.MathUtils.randInt(0, 4)];
@@ -93,9 +91,9 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
       planets.push(<Planet key={i} position={pos} size={size} />);
     }
     return planets;
-  };
+  }, []);
 
-  const genBigPlanet = () => {
+  const genBigPlanet = useMemo(() => {
     const size = 20000;
     const pos = new THREE.Vector3(30000, 30000, 30000);
     return (
@@ -104,27 +102,28 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
         <BigPlanet position={pos} size={size} />
       </>
     );
-  };
+  }, []);
 
   useLayoutEffect(() => {
     const sections = gsap.utils.toArray<HTMLElement>(".section-wrapper > section");
 
-    // 가로 스크롤 애니메이션
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
-        id: "horizontal-scroll", // ← ID 추가 (중요!)
+        id: "horizontal-scroll",
         trigger: ".section-wrapper",
         pin: true,
-        scrub: 2,
+        scrub: 0.75,
         snap: {
           snapTo: 1 / (sections.length - 1),
-          duration: { min: 0.25, max: 0.5 },
+          duration: { min: 0.1, max: 0.2 },
           delay: 0.1,
-          ease: "power2.inOut",
+          ease: "power1.inOut",
+          directional: true,
         },
         end: () => `+=${(sections.length - 1) * window.innerWidth}`,
+        anticipatePin: 1,
       },
     });
 
@@ -135,9 +134,12 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
 
   return (
     <div className="dom-wrapper" ref={scrollcontainerRef}>
+      <Loader />
+      <ScrollProgress totalSections={4} />
+      <ScrollHint />
       <Canvas
-        gl={{ antialias: false, alpha: false }} // antialias 끄기 권장(성능)
-        dpr={[1, Math.min(window.devicePixelRatio || 1, 1.5)]} // DPR 제한
+        gl={{ antialias: false, alpha: false }}
+        dpr={[1, Math.min(window.devicePixelRatio || 1, 1.5)]}
         style={{
           position: "fixed",
           inset: 0,
@@ -152,33 +154,40 @@ export const Dom = ({ isDebug = false }: { isDebug?: boolean }) => {
           far: 100000,
         }}
       >
-        <CanvasInputForwarder rootRef={interactiveRef} throttleMs={60} minMovePx={4} />
-        <color attach="background" args={["#111111"]} />
-        <ambientLight color={"#fff"} intensity={5} />
-        <OrbitControls ref={controlsRef} />
-        {isDebug && <axesHelper args={[100000]} />}
-        <AutoZoomOut speed={-10} controlsRef={controlsRef} />
-        <SVGMesh
-          svgPath="/github_mark.svg"
-          color="white"
-          scale={40000000}
-          depth={50}
-          position={[-80000, -80000, -80000]}
-        />
+        <Suspense fallback={<CanvasFallback />}>
+          <CanvasInputForwarder rootRef={interactiveRef} throttleMs={60} minMovePx={4} />
+          <color attach="background" args={["#111111"]} />
+          <ambientLight color={"#fff"} intensity={5} />
+          <OrbitControls ref={controlsRef} />
+          {isDebug && <axesHelper args={[100000]} />}
+          <AutoZoomOut speed={-10} controlsRef={controlsRef} />
+          <SVGMesh
+            svgPath="/github_mark.svg"
+            color="white"
+            scale={40000000}
+            depth={50}
+            position={[-80000, -80000, -80000]}
+          />
 
-        {genBackgroundStars()}
+          {genBackgroundStars}
+          <group ref={interactiveRef}>{genBackgroundPlanets}</group>
+          {genBigPlanet}
 
-        {/* interactive planets만 그룹에 넣음 -> raycast 대상 제한 */}
-        <group ref={interactiveRef}>{genBackgroundPlanets()}</group>
-
-        {genBigPlanet()}
+          <Preload all />
+        </Suspense>
       </Canvas>
 
       <div className="section-wrapper">
         <section className="section-01"></section>
-        <section className="section-02">{<Page1 isDebug={isDebug} />}</section>
-        <section className="section-03">{<Page2 />}</section>
-        <section className="section-03">{<Page3 />}</section>
+        <section className="section-02">
+          <Page1 isDebug={isDebug} />
+        </section>
+        <section className="section-03">
+          <Page2 />
+        </section>
+        <section className="section-04">
+          <Page3 />
+        </section>
       </div>
     </div>
   );
